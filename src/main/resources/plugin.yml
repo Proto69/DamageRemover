@@ -1,0 +1,12 @@
+name: DamageRemover
+version: '1.0'
+main: org.proto68.damageRemover.DamageRemover
+api-version: '1.21'
+authors: [ Proto68 ]
+description: Removes the damage.custom/magic/contact from WorldEdit regions specified in config
+depend:
+  - WorldGuard
+
+commands:
+  dmgrmvr:
+    description: DamageRemover main command

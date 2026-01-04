@@ -1,0 +1,8 @@
+# Whether the plugin is active or not
+enabled: true
+
+# The names of the regions that will be protected
+regionNames: ['spawn']
+
+# The damage types that will be removed from the regions
+damageTypes: ['contact', 'magic', 'custom']

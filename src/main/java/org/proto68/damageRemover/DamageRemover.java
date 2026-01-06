@@ -10,6 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -58,11 +59,15 @@ public class DamageRemover extends JavaPlugin implements Listener, org.bukkit.co
 
     // ================= DAMAGE HANDLING =================
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onDamage(EntityDamageEvent event) {
         if (!enabled) return;
         if (!(event.getEntity() instanceof Player player)) return;
         if (!blockedCauses.contains(event.getCause())) return;
+
+        if (!player.isOnline()) return;
+        if (player.isDead()) return;
+        if (player.getHealth() <= 0) return;
 
         RegionManager regionManager = WorldGuard.getInstance()
                 .getPlatform()
